@@ -1,7 +1,7 @@
 [project]
 name = "agentic-finance-research"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agentic AI system for financial research - LangGraph, MCP, RAG, eval framework, guardrails, observability."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
@@ -12,3 +12,20 @@ agentic-finance-research = "agentic_finance_research:main"
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.10",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "S"]
+ignore = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
