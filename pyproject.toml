@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Agentic AI system for financial research - LangGraph, MCP, RAG, eval framework, guardrails, observability."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "faiss-cpu>=1.15.1",
+    "langchain-text-splitters>=1.1.3",
+    "sentence-transformers>=6.1.0",
+]
 
 [project.scripts]
 agentic-finance-research = "agentic_finance_research:main"
