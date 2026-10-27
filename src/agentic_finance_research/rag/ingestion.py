@@ -2,11 +2,10 @@
 
 from pathlib import Path
 
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
-
 import faiss
 import numpy as np
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from sentence_transformers import SentenceTransformer
 
 # --- Configuration ---
 CHUNK_SIZE = 512
@@ -72,6 +71,3 @@ def ingest(file_path: str) -> tuple[faiss.IndexFlatL2, list[str]]:
 if __name__ == "__main__":
     index, chunks = ingest("data/raw/sample_10k.txt")
     print(f"\nDone! {len(chunks)} chunks indexed and ready for search.")
-
-    
-

@@ -4,14 +4,12 @@ import numpy as np
 import pytest
 
 from agentic_finance_research.rag.ingestion import (
+    build_index,
     chunk_text,
     create_embeddings,
-    build_index,
     load_document,
-    ingest,
 )
 from agentic_finance_research.rag.retrieval import search
-
 
 SAMPLE_TEXT = (
     "Revenue for the fiscal year was $94.9 billion. "

@@ -1,9 +1,8 @@
-"""" Retrieval layer - embed a query and find the most relevant chunks in the FAISS index."""
-
-from sentence_transformers import SentenceTransformer
+"""Retrieval layer - embed a query and find the most relevant chunks in the FAISS index."""
 
 import faiss
 import numpy as np
+from sentence_transformers import SentenceTransformer
 
 from agentic_finance_research.rag.ingestion import EMBEDDING_MODEL
 
@@ -18,17 +17,19 @@ def search(
     model = SentenceTransformer(EMBEDDING_MODEL)
     query_embedding = model.encode([query])
     query_embedding = np.array(query_embedding, dtype=np.float32)
-    
+
     distances, indices = index.search(query_embedding, top_k)
 
     results = []
-    for rank, (dist, idx) in enumerate(zip(distances[0], indices[0])):
-        results.append({
-            "rank": rank + 1,
-            "chunk_index": int(idx),
-            "distance": float(dist),
-            "text": chunks[idx],
-        })
+    for rank, (dist, idx) in enumerate(zip(distances[0], indices[0], strict=True)):
+        results.append(
+            {
+                "rank": rank + 1,
+                "chunk_index": int(idx),
+                "distance": float(dist),
+                "text": chunks[idx],
+            }
+        )
 
     return results
 
@@ -45,9 +46,9 @@ if __name__ == "__main__":
     ]
 
     for query in queries:
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"Query: {query}")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         results = search(query, index, chunks)
         for result in results:
             print(f"\n Rank {result['rank']} (distance: {result['distance']:.4f})")
